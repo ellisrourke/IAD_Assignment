@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,32 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Home</ion-title>
     </ion-toolbar>
   </ion-header>
+  
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title >asd</ion-card-title>
+          </ion-card-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+          <ion-card-content>
+            <ion-item>
+              <ion-label>Stay logged in</ion-label>
+              <ion-toggle color ="secondary" (ionChange)="changed()" [checked]="isToggled"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+              <ion-button color="secondary" (click)="popup()">Check radio</ion-button>
+            </ion-item>
+
+            <ion-item>
+              <ion-button color="secondary" (click)="loginModal()">Login</ion-button>
+
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+        
+         
+
 </ion-content>
