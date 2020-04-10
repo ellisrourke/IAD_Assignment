@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NavParams,ModalController} from '@ionic/angular'
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-login-modal',
@@ -7,12 +8,15 @@ import {NavParams,ModalController} from '@ionic/angular'
   styleUrls: ['./login-modal.page.scss'],
 })
 export class LoginModalPage implements OnInit {
+  users = []
   username: string;
-  password: string;
+  password: string; 
   ret: {username:string,password:string};
 
   constructor(public navParams:NavParams,public modalController:ModalController){
+    this.users = [{un: "ellisrourke",pa: "password123",},{un:"felicityrose",pa:"missy2000"}];
   }
+
 
   ngOnInit() {
     this.username = this.navParams.get('username')
@@ -20,7 +24,11 @@ export class LoginModalPage implements OnInit {
     }
 
   closeLoginModal(){
-    this.modalController.dismiss({username:this.username,password:this.password});
-    }
-
+    //this.users.forEach(element => {
+      //if(element.un == this.username && element.pa == this.password){
+        //this.modalController.dismiss(true);}
+    //} 
+    //,
+    this.modalController.dismiss(this.username,this.password); 
+  }
 }

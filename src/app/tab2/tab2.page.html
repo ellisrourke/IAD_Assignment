@@ -14,9 +14,12 @@
   </ion-header>
   <ion-searchbar placeholder="Search Properties"></ion-searchbar>
   
+
+
+  
   <ion-list>
-    <ion-item side="start" *ngFor="let property of properties; index as i">
-      <ion-card>
+    <ion-item side="start"  *ngFor="let property of properties; index as i">
+      <ion-card (press)="pressEvent()">
         <img src={{property.photo}}>
         <ion-card-content>
           <ion-card-title></ion-card-title>
@@ -27,13 +30,15 @@
     </ion-item>
   </ion-list>
 
+
+
         <ion-card>
           <ion-card-header>
-            <ion-card-title >asd</ion-card-title>
+            <ion-card-title >Page Options</ion-card-title>
           </ion-card-header>
 
           <ion-card-content>
-            <ion-item>
+            <ion-item> 
               <ion-label>Stay logged in</ion-label>
               <ion-toggle color ="secondary" (ionChange)="changed()" [checked]="isToggled"></ion-toggle>
             </ion-item>

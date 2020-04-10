@@ -4,7 +4,6 @@ import { ModalController } from '@ionic/angular';
 import { LoginModalPage } from '../login-modal/login-modal.page';
 import { PropertyDataService } from '../property-data.service'; 
 
-
 @Component({
 
   selector: 'app-tab2', 
@@ -26,7 +25,7 @@ export class Tab2Page{
     }
  
   ngOnInit(){
-    this.loadProperties();
+    this.PropertyDataService.properties.forEach(element => {console.log(element.streetName)});
   }
     
     
@@ -36,7 +35,7 @@ export class Tab2Page{
   }
 
   addProperty(){
-    this.PropertyDataService.addProperty("Doncaster Court",21,645000)
+    this.PropertyDataService.addProperty("Doncaster Court",21,645000,'37Lynbrook.jpg')
   }
 
 
@@ -52,7 +51,7 @@ export class Tab2Page{
     });
   }
 
-  async loginModal(){
+  /*async loginModal(){
     const modal = await this.modalController.create({
     component: LoginModalPage,
     componentProps: {username:this.username,password:this.password}
@@ -65,12 +64,25 @@ export class Tab2Page{
     });
     return modal.present();
     }
+*/
 
-  loadProperties(){
-    //this.PropertyDataService.display();
-    this.PropertyDataService.properties.forEach(element => {console.log(element.streetName)});
+  async loginModal(){
+    const modal = await this.modalController.create({
+    component: LoginModalPage,
+    componentProps: {username:this.username,password:this.password}
+    });
+    modal.onDidDismiss()
+    .then((data) => {
+    let status = data.data
+    console.log(status);
+    });
+    return modal.present();
+    }
+
+
+  pressEvent(){
+    console.log("pressed")
   }
-
 
 }
  
