@@ -2,31 +2,43 @@ import { Component,OnInit,ViewChild, ElementRef, ContentChild, asNativeElements 
 import { ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { LoginModalPage } from '../login-modal/login-modal.page';
+import { PropertyDataService } from '../property-data.service'; 
+
 
 @Component({
-  selector: 'app-tab2',
+
+  selector: 'app-tab2', 
   templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  styleUrls: ['tab2.page.scss'],
+  providers: [PropertyDataService]
 })
 export class Tab2Page{
     isToggled: boolean = true;
-    properties = [{streetName: 'Doncaster Court', streetNumber: 8, price:1200000, photo:'assets/houses/37Lynbrook.jpg'}];
+    //properties = [{streetName: 'Doncaster Court', streetNumber: 8, price:1200000, photo:'assets/houses/37Lynbrook.jpg'}];
+    properties = this.PropertyDataService.properties;
     toast: any;
+    PDS: any;
     username: string;
     password: string;
 
-    constructor(public toastController : ToastController, private modalController:ModalController) {
-      let newProperty = {streetName:"Pearl Street",streetNumber:21,price:750001,photo:'assets/houses/21Pearl.jpg'} 
-      this.properties.push(newProperty) 
+    constructor(public toastController : ToastController, private modalController:ModalController,public PropertyDataService: PropertyDataService) {
 
     }
  
+  ngOnInit(){
+    this.loadProperties();
+  }
     
     
   changed() {
     this.isToggled = !this.isToggled;
     console.log("working" + this.isToggled);
   }
+
+  addProperty(){
+    this.PropertyDataService.addProperty("Doncaster Court",21,645000)
+  }
+
 
   popup() {
     this.toast = this.toastController.create({
@@ -53,4 +65,12 @@ export class Tab2Page{
     });
     return modal.present();
     }
+
+  loadProperties(){
+    //this.PropertyDataService.display();
+    this.PropertyDataService.properties.forEach(element => {console.log(element.streetName)});
   }
+
+
+}
+ 

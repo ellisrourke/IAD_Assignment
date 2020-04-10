@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { LoginModalPageModule } from './login-modal/login-modal.module';
+import { PropertyDataService } from './property-data.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,8 +19,10 @@ import { LoginModalPageModule } from './login-modal/login-modal.module';
   providers: [
     StatusBar,
     SplashScreen,
+    PropertyDataService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
