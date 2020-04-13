@@ -40,10 +40,10 @@ export class Tab1Page implements OnInit {
           yAxes: [
             {
               ticks: {callback: function(value, index, values) {
-                        return value/1000000 + 'M';
+                        return value/1000000;
                     },
                 beginAtZero: false
-              }
+              } 
             }
           ]
         }
@@ -52,5 +52,17 @@ export class Tab1Page implements OnInit {
     
     }
 
+    updateChart() {
+      let chart = this.lineChart;
+      let d = [];
+      this.PropertyDataService.properties.forEach(element => {d.push(element.price)}); 
+      console.log(chart)
+      chart.data.datasets.pop();
+      chart.data.datasets.push({
+        label: d,
+        data: d
+      });
+      chart.update();
+    }
 
 }

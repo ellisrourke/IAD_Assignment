@@ -24,11 +24,11 @@ export class LoginModalPage implements OnInit {
     }
 
   closeLoginModal(){
-    //this.users.forEach(element => {
-      //if(element.un == this.username && element.pa == this.password){
-        //this.modalController.dismiss(true);}
-    //} 
-    //,
-    this.modalController.dismiss(this.username,this.password); 
-  }
-}
+    this.users.forEach(element => {
+      if(element.un === this.username){
+        if(element.pa === this.password){
+          this.modalController.dismiss(true)}}
+
+})
+this.modalController.dismiss(false)
+}}

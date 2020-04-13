@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { preserveWhitespacesDefault } from '@angular/compiler';
+import { element } from 'protractor';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +13,7 @@ export class PropertyDataService {
 
   constructor() {}
 
+  
   display(){
     this.properties.forEach(element => {console.log(element.streetName)
     });
@@ -25,6 +28,14 @@ export class PropertyDataService {
     let prices = [];
     this.properties.forEach(element => {prices.push(element.price)}); 
     return prices
+  }
+
+  findProperties(search){
+    let props = []
+    search = search.toLowerCase()
+    this.properties.forEach(element => {if (element.streetName.toLowerCase().includes(search)){props.push(element)}
+    });
+    return props
   }
 
 

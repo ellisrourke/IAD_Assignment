@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>List Your Property</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+  <ion-card-header>
+    <ion-card-title >List Your Property</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+      <ion-input type="number" placeholder="Street number" [(ngModel)]="streetNo" clearInput></ion-input>
+      <ion-input type="text" placeholder="Street name" [(ngModel)]="streetName" clearInput></ion-input>
+      <ion-input type="number" placeholder="Price" [(ngModel)]="price" clearInput></ion-input>
+      <ion-button color="secondary" (click)="closeAddPropertyModal()">Submit</ion-button>
+
+  </ion-card-content>
+  </ion-card>
+</ion-content>
