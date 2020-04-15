@@ -4,6 +4,8 @@ import { ModalController } from '@ionic/angular';
 import { LoginModalPage } from '../login-modal/login-modal.page';
 import { PropertyDataService } from '../property-data.service'; 
 import { AddPropertyModalPage } from '../add-property-modal/add-property-modal.page'
+import { PropertydetailsPage } from '../propertydetails/propertydetails.page'
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
 
@@ -27,7 +29,7 @@ export class Tab2Page{
     streetName: string;
     price: number;
     
-    constructor(public toastController : ToastController, private modalController:ModalController,public PropertyDataService: PropertyDataService) {
+    constructor(public toastController : ToastController, private modalController:ModalController,public PropertyDataService: PropertyDataService, public router : Router, private route: ActivatedRoute) {
 
     }
  
@@ -90,8 +92,10 @@ export class Tab2Page{
       return modal.present();
       }
   
-  pressEvent(){
-    console.log("pressed")
+  viewProperty(i:number){
+    this.router.navigate(['/propertydetails/i'],{
+    queryParams: this.PropertyDataService.properties[i],
+    });
   }
 
   onSearchChange(event){
@@ -104,9 +108,3 @@ export class Tab2Page{
     }
 
   }
-
-    //let value = e.details.value;
-    //if(value = ''){
-    //  return;
-    //}
-    //this.properties = this.PropertyDataService.findProperties(value)

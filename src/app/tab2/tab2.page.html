@@ -1,22 +1,25 @@
 
 <ion-content [fullscreen]="true" >
   <ion-header collapse="condense">
+
     <ion-toolbar>
+      <ion-button (click)="addPropertyModal()" color="secondary"><ion-icon name="add-outline" ></ion-icon></ion-button>
       <ion-title>Home</ion-title>
       <ion-button class="loginButton" slot="end" color="secondary" (click)="loginModal()">Login</ion-button>
     </ion-toolbar>
+
   </ion-header>
   <ion-searchbar placeholder="Search Properties" (ionInput)=onSearchChange($event)></ion-searchbar>
 
   
 
 
-  
-  <ion-list>
+ <ion-list>
     <ion-item-sliding side="start"  *ngFor="let property of properties; index as i">
-      <ion-item>
-      <ion-card (press)="pressEvent()">
-        <img src={{property.photo}}>
+      <!--  <ion-item routerLink ="/propertydetails/index"><ion-item (click)="viewProperty(i)"> -->
+        <ion-item (click)="viewProperty(i)">
+      <ion-card>
+        <img src={{property.photo}} >
         <ion-card-content>
           <ion-card-title></ion-card-title>
          <ion-card-title >{{property.streetNumber}} {{property.streetName}}</ion-card-title>
