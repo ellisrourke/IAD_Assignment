@@ -11,11 +11,26 @@
   </ion-card-header>
 
   <ion-card-content>
-      <ion-input type="number" placeholder="Street number" [(ngModel)]="streetNo" clearInput></ion-input>
-      <ion-input type="text" placeholder="Street name" [(ngModel)]="streetName" clearInput></ion-input>
-      <ion-input type="number" placeholder="Price" [(ngModel)]="price" clearInput></ion-input>
-      <ion-button color="secondary" (click)="closeAddPropertyModal()">Submit</ion-button>
+    <ion-list>
+      <ion-item><ion-input type="number" placeholder="Street number" [(ngModel)]="streetNo" clearInput></ion-input></ion-item>
+      <ion-item><ion-input type="text" placeholder="Street name" [(ngModel)]="streetName" clearInput></ion-input></ion-item>
+      <ion-item><ion-input type="number" placeholder="Price" [(ngModel)]="price" clearInput></ion-input></ion-item>
+      <ion-item><ion-input type="number" placeholder="Bedrooms" [(ngModel)]="Bedrooms" clearInput></ion-input></ion-item>
+      <ion-item><ion-input type="number" placeholder="Bathrooms" [(ngModel)]="Bathrooms" clearInput></ion-input></ion-item>
+      <ion-item><ion-checkbox disabled="false"></ion-checkbox>Pets Not Allowed</ion-item>
 
-  </ion-card-content>
+
+
+      <ion-item>
+        <ion-label>MM DD YY</ion-label>
+        <ion-datetime displayFormat="MM DD YY" placeholder="Available From"></ion-datetime>
+      </ion-item>
+
+      <ion-item><ion-button color="secondary" (click)="closeAddPropertyModal()">Submit</ion-button></ion-item>
+    </ion-list>
+
+    <ion-item><input #fileInput type="file" accept="image/*" (change)="imageSelected(fileInput.files)" multiple></ion-item>
+    <img src={{imageFile}}>
+  </ion-card-content> 
   </ion-card>
 </ion-content>

@@ -1,19 +1,34 @@
 import { Injectable } from '@angular/core';
 import { preserveWhitespacesDefault } from '@angular/compiler';
 import { element } from 'protractor';
+import { Storage } from '@ionic/storage'
+
+
+
 @Injectable({
   providedIn: 'root'
-})
+}) 
 export class PropertyDataService {
-  public properties = [{streetName: 'Doncaster Court', streetNumber: 8, price:1200000, photo:'assets/houses/37Lynbrook.jpg'},
+  public properties = []
+  defaultProperties = [{streetName: 'Doncaster Court', streetNumber: 8, price:1200000, photo:'assets/houses/37Lynbrook.jpg'},
   {streetName: 'Sandgate Drive', streetNumber: 17, price:895000, photo:'assets/houses/17Sandgate.jpg'},
   {streetName: 'Peninsula Drive', streetNumber: 57, price:955000, photo:'assets/houses/57Peninsula.jpg'},
   {streetName: 'Newport Road', streetNumber: 58, price:1330000, photo:'assets/houses/58Newport.jpg'},
   {streetName: 'Northhill Parade', streetNumber: 143, price:1550000, photo:'assets/houses/143NorthHill.jpg'}];
 
-  constructor() {}
+  constructor(private storage : Storage) {}
 
-  
+  async ngOnInit(){
+    this.storage.get("properties").then((val) => {
+      if(val==null){
+        this.properties = this.defaultProperties;
+      } else {
+        this.properties = val;
+        console.log("here")
+      }
+  });
+  }
+
   display(){
     this.properties.forEach(element => {console.log(element.streetName)
     });
@@ -22,11 +37,12 @@ export class PropertyDataService {
   addProperty(streetNameIn:string, streetNumberIn:number, priceIn:number, photoIn:string){
     let housePhoto = 'assets/houses/'+ photoIn;
     this.properties.push({streetName:streetNameIn,streetNumber:streetNumberIn,price:priceIn,photo:housePhoto})
+    this.storage.set("properties",this.properties)
   }
 
   getHousePrices(){
     let prices = [];
-    this.properties.forEach(element => {prices.push(element.price)}); 
+    this.properties.forEach(element => {console.log(element.price)}); 
     return prices
   }
 

@@ -3,15 +3,15 @@
   <ion-header collapse="condense">
 
     <ion-toolbar>
-      <ion-button (click)="addPropertyModal()" color="secondary"><ion-icon name="add-outline" ></ion-icon></ion-button>
-      <ion-title>Home</ion-title>
-      <ion-button class="loginButton" slot="end" color="secondary" (click)="loginModal()">Login</ion-button>
-    </ion-toolbar>
+      <ion-title></ion-title>
+      
 
+
+      <ion-button class="loginButton" slot="end" color="secondary" (click)="addPropertyModal()">List my Property</ion-button>
+    </ion-toolbar>
   </ion-header>
   <ion-searchbar placeholder="Search Properties" (ionInput)=onSearchChange($event)></ion-searchbar>
 
-  
 
 
  <ion-list>
@@ -32,9 +32,5 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-<ion-card>
-  <ion-card-content>
-<ion-button shape="round" expand="full" color="secondary" (click)="addPropertyModal()">List Your property</ion-button>
-</ion-card-content>
-</ion-card>
+
 </ion-content>

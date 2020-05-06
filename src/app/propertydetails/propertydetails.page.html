@@ -4,7 +4,29 @@
     <ion-title>property details</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>    
 
-<ion-content>
+
+  <div class="ion-padding">
+    <ion-card>
+        <img src={{photo}} />
+        <ion-card-header>
+          <ion-card-title>{{streetNo}} {{streetName}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+        
+      <ion-item>
+        ${{price}}
+      </ion-item>
+      <ion-item>
+        2 &nbsp;
+        <ion-icon item-start name="bed-outline" class="icon"> </ion-icon> 
+        &nbsp; 3 &nbsp;
+        <ion-icon item-start name="water-outline" class="icon"> </ion-icon> 
+      </ion-item>     
+        </ion-card-content>      
+    </ion-card>
+  </div>
+  
 
 </ion-content>

@@ -6,34 +6,44 @@ import { PropertyDataService } from '../property-data.service';
 import { AddPropertyModalPage } from '../add-property-modal/add-property-modal.page'
 import { PropertydetailsPage } from '../propertydetails/propertydetails.page'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Storage } from '@ionic/storage'
+
 
 @Component({
 
   selector: 'app-tab2', 
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  providers: [PropertyDataService]
+  //providers: [PropertyDataService]
+  providers: []
+
 })
 export class Tab2Page{
     loggedIn = false;
     isToggled: boolean = true;
     //properties = [{streetName: 'Doncaster Court', streetNumber: 8, price:1200000, photo:'assets/houses/37Lynbrook.jpg'}];
-    properties = this.PropertyDataService.properties;
+    properties = []
     toast: any;
     PDS: any;
 
     username: string;
     password: string;
 
-    streetNo: number;
+    streetNo: number; 
     streetName: string;
     price: number;
     
-    constructor(public toastController : ToastController, private modalController:ModalController,public PropertyDataService: PropertyDataService, public router : Router, private route: ActivatedRoute) {
+    constructor(public toastController : ToastController, private modalController:ModalController,public PropertyDataService: PropertyDataService, public router : Router, private route: ActivatedRoute,     public storage : Storage,
+      ) {
 
     }
  
-  ngOnInit(){}
+  ngOnInit(){
+    this.loginModal();
+    //this.storage.forEach(element => {console.log(this.storage[element]),this.properties.push(this.storage[element])})
+    console.log(this.storage.length())
+    this.properties = this.PropertyDataService.properties
+  }
     
     
   changed() {
@@ -46,6 +56,7 @@ export class Tab2Page{
   removeProperty(i:number){
     console.log("remove ",i)
     this.PropertyDataService.properties.splice(i,1)
+    console.log(this.PropertyDataService.properties)
   }
 
 
@@ -70,9 +81,9 @@ export class Tab2Page{
     });
     modal.onDidDismiss()
     .then((data) => {
-    let status = data.data
-    console.log(status);
-    this.popup(status);
+    //let status = data.data
+    //console.log(status);
+    //this.popup(status);
     });
     return modal.present();
     }
@@ -106,5 +117,11 @@ export class Tab2Page{
      if(searchTerm != ''){this.properties = this.PropertyDataService.findProperties(searchTerm);}
      else{this.properties = this.PropertyDataService.properties;}
     }
+
+    chartChange(){
+      console.log("test")
+    }
+
+
 
   }

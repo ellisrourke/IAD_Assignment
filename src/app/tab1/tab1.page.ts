@@ -6,19 +6,22 @@ import { Chart } from 'chart.js';
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  providers: [PropertyDataService]
+  //providers: [PropertyDataService]
+  providers: []
 
 })
 export class Tab1Page implements OnInit { 
   @ViewChild("lineCanvas") lineCanvas: ElementRef;
+
   private lineChart: Chart; 
   x = []
-  
-  constructor(public PropertyDataService: PropertyDataService) {
-
-  }
+  constructor(public PropertyDataService: PropertyDataService) {}
  
   ngOnInit(){
+    console.log('aaa')
+    
+
+
     this.PropertyDataService.properties.forEach(element => {this.x.push(element.price),console.log(this.x.length)}); 
     console.log(this.x)
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
@@ -29,8 +32,8 @@ export class Tab1Page implements OnInit {
           {
             label: "Average House Price",
             data: this.x,
-            backgroundColor: ['#3dc2ff90'],
-            borderColor:   ['#3dc2ffff'],
+            backgroundColor: ['#2dd36f'],
+            borderColor:   ['4df38f'],
             borderWidth: 1
           }
         ]
@@ -52,17 +55,21 @@ export class Tab1Page implements OnInit {
     
     }
 
+    ionViewWillEnter(){
+      this.updateChart()
+    }	
+
     updateChart() {
-      let chart = this.lineChart;
-      let d = [];
-      this.PropertyDataService.properties.forEach(element => {d.push(element.price)}); 
-      console.log(chart)
-      chart.data.datasets.pop();
-      chart.data.datasets.push({
-        label: d,
-        data: d
+      console.log("UPDATE")
+      console.log(this.lineChart.data.datasets[0].data)
+      let newPrices = []
+      this.PropertyDataService.properties.forEach(element => {
+        newPrices.push(element.price)
       });
-      chart.update();
+
+      this.lineChart.data.datasets[0].data = newPrices;
+      this.lineChart.data.labels = newPrices;
+      this.lineChart.update();
     }
 
 }

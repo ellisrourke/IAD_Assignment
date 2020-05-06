@@ -9,13 +9,14 @@ import { AppComponent } from './app.component';
 import { LoginModalPageModule } from './login-modal/login-modal.module';
 import { PropertyDataService } from './property-data.service';
 import { AddPropertyModalPageModule } from './add-property-modal/add-property-modal.module'
+import { IonicStorageModule } from '@ionic/storage';
 
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, LoginModalPageModule, AddPropertyModalPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, LoginModalPageModule, AddPropertyModalPageModule, IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
