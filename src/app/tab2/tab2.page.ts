@@ -9,7 +9,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Storage } from '@ionic/storage'
 
 
-@Component({
+@Component({ 
 
   selector: 'app-tab2', 
   templateUrl: 'tab2.page.html',
@@ -38,10 +38,21 @@ export class Tab2Page{
 
     }
  
-  ngOnInit(){
+  async ngOnInit(){
+    this.storage.get("properties").then((val) => {
+      if(val==""){
+        console.log("null")
+        this.PropertyDataService.properties = this.PropertyDataService.defaultProperties
+        this.properties = this.PropertyDataService.properties;
+      } else {
+        this.properties = val;
+        console.log("here")
+      }
+  });
+
+
     this.loginModal();
     //this.storage.forEach(element => {console.log(this.storage[element]),this.properties.push(this.storage[element])})
-    console.log(this.storage.length())
     this.properties = this.PropertyDataService.properties
   }
     
@@ -55,7 +66,9 @@ export class Tab2Page{
   
   removeProperty(i:number){
     console.log("remove ",i)
-    this.PropertyDataService.properties.splice(i,1)
+    this.properties.splice(i,1)
+    this.PropertyDataService.properties = this.properties;
+    this.storage.set("properties",this.properties)
     console.log(this.PropertyDataService.properties)
   }
 
@@ -64,8 +77,8 @@ export class Tab2Page{
     if(status){status = "succesful"} else {status = "unsuccesful"}
     this.toast = this.toastController.create({
       color: "secondary",
-      position: "top",
-      message: 'Login was ' + status,
+      position: "bottom",
+      message: 'Property listing was ' + status,
       duration: 3000
     }).then((toastData)=>{
       console.log(toastData);
@@ -99,6 +112,9 @@ export class Tab2Page{
         console.log(data.data.price);
         let newProperty = data.data
         this.PropertyDataService.addProperty(newProperty.streetName,newProperty.streetNo,newProperty.price,newProperty.url)
+        this.properties = this.PropertyDataService.properties
+        this.storage.set("properties",this.properties)
+        this.popup(1)
       });
       return modal.present();
       }

@@ -19,15 +19,9 @@ export class PropertyDataService {
   constructor(private storage : Storage) {}
 
   async ngOnInit(){
-    this.storage.get("properties").then((val) => {
-      if(val==null){
-        this.properties = this.defaultProperties;
-      } else {
-        this.properties = val;
-        console.log("here")
-      }
-  });
-  }
+
+
+  } 
 
   display(){
     this.properties.forEach(element => {console.log(element.streetName)
