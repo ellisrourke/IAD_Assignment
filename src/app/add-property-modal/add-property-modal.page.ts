@@ -3,6 +3,7 @@ import {NavParams,ModalController} from '@ionic/angular'
 import { PropertyDataService } from '../property-data.service'; 
 import { element } from 'protractor';
 import { Storage } from '@ionic/storage'
+import { stringify } from 'querystring';
 @Component({
   selector: 'app-add-property-modal',
   templateUrl: './add-property-modal.page.html',
@@ -15,7 +16,9 @@ export class AddPropertyModalPage implements OnInit {
   streetNo:number;
   streetName:string;
   price:number;
-  //imageFile:string | ArrayBuffer;
+  //imageFile:string;
+  imagefile = null;
+  imageFile: string | ArrayBuffer;
 
   constructor(public navParams:NavParams,public modalController:ModalController,public PropertyDataService: PropertyDataService, public storage:Storage) { 
     //this.storage.get('avatar').then(val => {
@@ -44,10 +47,23 @@ bedroomOption(){
   console.log("yes")
 }
 
-closeAddPropertyModal(){  
+imageSelected(files){
+  console.log(files);
+  let fileReader = new FileReader();
+
+  fileReader.onload = e => {
+    this.imageFile = fileReader.result;
+  }
+fileReader.readAsDataURL(files[0])
+  console.log(this.imageFile)
+}
+
+closeAddPropertyModal(event){  
   const photoURL = '57Peninsula.jpg';
+  //console.log(event)
+  //console.log(fileReader.readAsDataURL(files[0]))
   //this.PropertyDataService.addProperty(this.streetName, this.streetNo, this.price, photoURL)
-  this.modalController.dismiss({streetName:this.streetName, streetNo:this.streetNo, price:this.price, url:photoURL});
+  this.modalController.dismiss({streetName:this.streetName, streetNo:this.streetNo, price:this.price, url:this.imageFile});
 }
 
 /*imageSelected(files) {

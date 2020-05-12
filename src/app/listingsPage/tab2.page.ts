@@ -98,7 +98,7 @@ export class Tab2Page{
     //console.log(status);
     //this.popup(status);
     });
-    return modal.present();
+    return modal.present(); 
     }
 
     async addPropertyModal(){
@@ -107,13 +107,13 @@ export class Tab2Page{
         componentProps: {streetName:this.streetName,streetNo:this.streetNo,price:this.price}
       });
       
-      modal.onDidDismiss()
+      modal.onDidDismiss() 
       .then((data) => {
         console.log(data.data.price);
         let newProperty = data.data
         this.PropertyDataService.addProperty(newProperty.streetName,newProperty.streetNo,newProperty.price,newProperty.url)
         this.properties = this.PropertyDataService.properties
-        this.storage.set("properties",this.properties)
+        this.storage.set("properties",this.PropertyDataService.properties)
         this.popup(1)
       });
       return modal.present();

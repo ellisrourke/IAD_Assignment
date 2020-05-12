@@ -28,3 +28,28 @@
 .can-go-back header-component ion-back-button {
     display: block;
   } 
+
+  .card-centre{
+    transform: translateY(-50%);
+    top: 50%;
+    height: 50%;
+    left: 2.5%;
+    right: 2.5%;
+    position: absolute;
+    width: 95%;
+    }
+
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 60;
+    }
+
+    .splashText{
+      text-align: center;
+    }
+
+    .propSearchBar{
+      padding-top: 40px;
+    }

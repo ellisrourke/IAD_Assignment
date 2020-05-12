@@ -1,19 +1,11 @@
-<ion-content>
-  <h1 class="title" style="text-align:center;">Login</h1>
+<ion-content class="card-centre">
+  <img src="assets/icon.png" height="60" width="60" class="center">
+  <h2 class="splashText">Welcome to inHouse</h2>
     <ion-card>
       <ion-card-content>
       <ion-input type="text" placeholder="username" [(ngModel)]="username" clearInput></ion-input>
       <ion-input type="text" placeholder="password" [(ngModel)]="password" clearInput></ion-input>
       <ion-button expand="full"color="secondary" (click)="verifyLogin()">Submit</ion-button>
     </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-card-content>
-
-    <p>username: ellisrourke<p>
-    <p>password: password123<p>
-      </ion-card-content>
-
     </ion-card>
 </ion-content>

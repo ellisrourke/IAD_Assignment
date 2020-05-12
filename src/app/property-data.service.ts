@@ -29,7 +29,8 @@ export class PropertyDataService {
   }
 
   addProperty(streetNameIn:string, streetNumberIn:number, priceIn:number, photoIn:string){
-    let housePhoto = 'assets/houses/'+ photoIn;
+    //let housePhoto = 'assets/houses/'+ 
+    let housePhoto = photoIn;
     this.properties.push({streetName:streetNameIn,streetNumber:streetNumberIn,price:priceIn,photo:housePhoto})
     this.storage.set("properties",this.properties)
   }

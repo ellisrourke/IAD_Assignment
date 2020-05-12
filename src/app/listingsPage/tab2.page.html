@@ -2,17 +2,15 @@
 <ion-content [fullscreen]="true" >
   <ion-header collapse="condense">
 
-    <ion-toolbar>
-      <ion-title></ion-title>
-      
 
-
-      <ion-button class="loginButton" slot="end" color="secondary" (click)="addPropertyModal()">List my Property</ion-button>
-    </ion-toolbar>
   </ion-header>
-  <ion-searchbar placeholder="Search Properties" (ionInput)=onSearchChange($event)></ion-searchbar>
+  <ion-searchbar placeholder="Search Properties" (ionInput)=onSearchChange($event) class="propSearchBar"></ion-searchbar>
 
-
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add-circle"  (click)="addPropertyModal()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
  <ion-list>
     <ion-item-sliding side="start"  *ngFor="let property of properties; index as i">
