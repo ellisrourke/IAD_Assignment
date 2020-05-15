@@ -25,11 +25,11 @@
         <ion-label>MM DD YY</ion-label>
         <ion-datetime displayFormat="MM DD YY" placeholder="Available From"></ion-datetime>
       </ion-item>
+      <ion-item><input #fileInput type="file" accept="image/*" (change)="imageSelected(fileInput.files)" multiple></ion-item>
 
-      <ion-item><ion-button color="secondary" (click)="closeAddPropertyModal()">Submit</ion-button></ion-item>
     </ion-list>
+    <ion-button color="secondary" expand="full" class="centerbutton" (click)="closeAddPropertyModal()">Submit</ion-button>
 
-    <ion-item><input #fileInput type="file" accept="image/*" (change)="imageSelected(fileInput.files)" multiple></ion-item>
     <img src={{imageFile}}>
   </ion-card-content> 
   </ion-card>

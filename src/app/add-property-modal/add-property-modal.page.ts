@@ -16,64 +16,34 @@ export class AddPropertyModalPage implements OnInit {
   streetNo:number;
   streetName:string;
   price:number;
-  //imageFile:string;
   imagefile = null;
   imageFile: string | ArrayBuffer;
 
-  constructor(public navParams:NavParams,public modalController:ModalController,public PropertyDataService: PropertyDataService, public storage:Storage) { 
-    //this.storage.get('avatar').then(val => {
-    //  this.imageFile = val;
-    //  });
-  }
+  constructor(public navParams:NavParams,public modalController:ModalController,public PropertyDataService: PropertyDataService, public storage:Storage) { }
 
   ngOnInit() {
+    //fetch data from the modal form
     this.streetNo = this.navParams.get('streetNo')
     this.streetName = this.navParams.get('streetName')
     this.price = this.navParams.get('price')
   }
 
 
-//closeLoginModal(){
-//  this.users.forEach(element => {
-//    if(element.un === this.username){
-//      if(element.pa === this.password){
-//        this.modalController.dismiss(true)}}
-//
-//})
-//this.modalController.dismiss(false)/
-//}}
-
-bedroomOption(){
-  console.log("yes")
-}
-
 imageSelected(files){
-  console.log(files);
+  //allow user to select a file from local storage to be saved with the property listing
+  //and convert uploaded image to data URL to be stored in string format
   let fileReader = new FileReader();
-
   fileReader.onload = e => {
     this.imageFile = fileReader.result;
   }
 fileReader.readAsDataURL(files[0])
-  console.log(this.imageFile)
 }
 
 closeAddPropertyModal(event){  
-  const photoURL = '57Peninsula.jpg';
-  //console.log(event)
-  //console.log(fileReader.readAsDataURL(files[0]))
-  //this.PropertyDataService.addProperty(this.streetName, this.streetNo, this.price, photoURL)
+  //close modal and return all data to the modal controller
   this.modalController.dismiss({streetName:this.streetName, streetNo:this.streetNo, price:this.price, url:this.imageFile});
 }
 
-/*imageSelected(files) {
-  let fileReader = new FileReader();
-  fileReader.onload = e => {
-    this.imageFile = fileReader.result;
-    this.storage.set('avatar',this.imageFile)
-  };
-  fileReader.readAsDataURL(files[0]);
-  }*/
 
 
 }

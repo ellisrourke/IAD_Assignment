@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { EmailValidator } from '@angular/forms';
 
 @Component({
-  selector: 'app-tab3',
+  selector: 'app-tab3', 
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
+export class Tab3Page {//list of static agents to be displayed in the agents contact page
   public agents = [{name:'Shane McLeod',email:'ellisrourke@gmail.com',phone:'0413331945',photo:'shanemcleod.jpg',agency:'LJ Hooker'},
   {name:'Jesse Young',email:'ellisrourke@gmail.com',phone:'0468643571',photo:'jesseyoung.jpg',agency:'Remax'},
   {name:'Leanne Jenke',email:'ellisrourke@gmail.com',phone:'0432121740',photo:'leannejenke.png',agency:'Ray White'},

@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 
 
 export class PropertydetailsPage implements OnInit {
-
+  //initialise values to be displayed on screen
   streetName:string;
   streetNo:number;
   price:number;
@@ -17,12 +17,11 @@ export class PropertydetailsPage implements OnInit {
   beds:number;
   baths:number; 
 
-  description ="If you are seeking a spacious family home with an outdoor lifestyle in a great central location, then look no further! Situated on a peaceful 782m2 level block, there is room for everyone with two large separate living areas, and a large grassed back yard. Let the kids run around further, with direct back access onto Lancewood Circuit Reserve.";
+  //activaed route used to pass data in
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.description);
-
+    //get values from the router and assign them to values to be displayed using the ngModel
     this.route.queryParams.subscribe((res)=>{
       console.log(res);
       this.streetName = res.streetName;

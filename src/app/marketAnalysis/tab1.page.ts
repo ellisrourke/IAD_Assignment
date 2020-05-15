@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PropertyDataService } from '../property-data.service'; 
 import { Chart } from 'chart.js';
-
+//test
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -11,19 +11,14 @@ import { Chart } from 'chart.js';
 
 })
 export class Tab1Page implements OnInit { 
-  @ViewChild("lineCanvas") lineCanvas: ElementRef;
-
-  private lineChart: Chart; 
-  x = []
+  @ViewChild("lineCanvas",{static:true}) lineCanvas: ElementRef;
+  private lineChart: Chart; //main chart element
+  x = [] //list of proptery prices for the chart
   constructor(public PropertyDataService: PropertyDataService) {}
  
   ngOnInit(){
-    console.log('aaa')
-    
-
-
-    this.PropertyDataService.properties.forEach(element => {this.x.push(element.price),console.log(this.x.length)}); 
-    console.log(this.x)
+    //initialise price values to be displayed on chart
+    this.PropertyDataService.properties.forEach(element => {this.x.push(element.price)}); 
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: "line",
       data: {
@@ -52,16 +47,12 @@ export class Tab1Page implements OnInit {
         }
       }
     });
-    
     }
 
-    ionViewWillEnter(){
-      this.updateChart()
-    }	
 
     updateChart() {
-      console.log("UPDATE")
-      console.log(this.lineChart.data.datasets[0].data)
+      //when a property is added or removed from the application
+      //this funtion is used to update the graph with the new property prices
       let newPrices = []
       this.PropertyDataService.properties.forEach(element => {
         newPrices.push(element.price)
@@ -72,4 +63,9 @@ export class Tab1Page implements OnInit {
       this.lineChart.update();
     }
 
+
+    ionViewDidEnter(){
+      console.log("did enter")
+      this.updateChart()
+    }
 }

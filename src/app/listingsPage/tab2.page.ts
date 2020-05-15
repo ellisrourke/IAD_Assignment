@@ -21,7 +21,6 @@ import { Storage } from '@ionic/storage'
 export class Tab2Page{
     loggedIn = false;
     isToggled: boolean = true;
-    //properties = [{streetName: 'Doncaster Court', streetNumber: 8, price:1200000, photo:'assets/houses/37Lynbrook.jpg'}];
     properties = []
     toast: any;
     PDS: any;
@@ -33,47 +32,38 @@ export class Tab2Page{
     streetName: string;
     price: number;
     
-    constructor(public toastController : ToastController, private modalController:ModalController,public PropertyDataService: PropertyDataService, public router : Router, private route: ActivatedRoute,     public storage : Storage,
-      ) {
+    constructor(public toastController : ToastController, private modalController:ModalController,public PropertyDataService: PropertyDataService, public router : Router, private route: ActivatedRoute,     public storage : Storage,){
 
     }
  
   async ngOnInit(){
+    //if the app is being loaded for the first time, load default properties from storage,
+    //else load the already stored properties from storage instead
     this.storage.get("properties").then((val) => {
       if(val==""){
-        console.log("null")
         this.PropertyDataService.properties = this.PropertyDataService.defaultProperties
         this.properties = this.PropertyDataService.properties;
       } else {
         this.properties = val;
-        console.log("here")
       }
   });
 
 
-    this.loginModal();
-    //this.storage.forEach(element => {console.log(this.storage[element]),this.properties.push(this.storage[element])})
+    this.loginModal(); //present login modal to the user before app access.
     this.properties = this.PropertyDataService.properties
   }
-    
-    
-  changed() {
-    this.isToggled = !this.isToggled;
-    console.log("working" + this.isToggled);
-  }
-
-  //addProperty(){this.PropertyDataService.addProperty("Doncaster Court",21,645000,'37Lynbrook.jpg')}
-  
+     
   removeProperty(i:number){
-    console.log("remove ",i)
+    //given the index of a property from the html ngModel, remove that property from the array and update the property data service
+    //and store the new properties in the storage module
     this.properties.splice(i,1)
     this.PropertyDataService.properties = this.properties;
     this.storage.set("properties",this.properties)
-    console.log(this.PropertyDataService.properties)
   }
 
 
   popup(status) {
+    //inform user if their property was succesfully listed via a toast notification.
     if(status){status = "succesful"} else {status = "unsuccesful"}
     this.toast = this.toastController.create({
       color: "secondary",
@@ -88,20 +78,19 @@ export class Tab2Page{
 
 
   async loginModal(){
+    //provide the login modal to the user
     const modal = await this.modalController.create({
     component: LoginModalPage,
     componentProps: {username:this.username,password:this.password}
     });
     modal.onDidDismiss()
-    .then((data) => {
-    //let status = data.data
-    //console.log(status);
-    //this.popup(status);
-    });
+    .then((data) => {});
     return modal.present(); 
     }
 
     async addPropertyModal(){
+      //present the add property modal to the user and when returned,
+      //add the data to the array and update the storage module with the new property
       const modal = await this.modalController.create({
         component: AddPropertyModalPage,
         componentProps: {streetName:this.streetName,streetNo:this.streetNo,price:this.price}
@@ -120,24 +109,17 @@ export class Tab2Page{
       }
   
   viewProperty(i:number){
+    //view a single property in more detail given its parameters via the ionic router
     this.router.navigate(['/propertydetails/i'],{
     queryParams: this.PropertyDataService.properties[i],
     });
   }
 
   onSearchChange(event){
-    //return this.properties.filter((item) => {
-     // return item.streetName.toLowerCase().includes(searchTerm.toLowerCase());
+    //update the list of properties based on a search term provided by the user.
      let searchTerm = event.target.value
      console.log(searchTerm)
      if(searchTerm != ''){this.properties = this.PropertyDataService.findProperties(searchTerm);}
      else{this.properties = this.PropertyDataService.properties;}
     }
-
-    chartChange(){
-      console.log("test")
-    }
-
-
-
   }
